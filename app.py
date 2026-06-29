@@ -51,7 +51,7 @@ with st.sidebar:
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("### 🏫 **Facultad de Ciencias**")
     st.markdown("**Proyecto:** Monitoreo de Gases de Efecto Invernadero")
-    st.markdown("**Estudiante:** Ruth Turpo")
+    st.markdown("**Estudiante:** Ruth Turpo y Leonela Aldana")
     st.write("---")
     st.info("💡 *Consejo: Navega por las pestañas superiores para explorar los diferentes contaminantes medidos en Gigagramos.*")
 
