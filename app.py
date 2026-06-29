@@ -36,14 +36,19 @@ df["ANIO"] = df["ANIO"].astype(int)
 st.title("Panel de Emisiones GEI")
 
 # ==========================
-# PESTAÑAS
+# PESTAÑAS (5 pestañas oficiales)
 # ==========================
 
-tab1, tab2, tab3 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "📈 Evolución Temporal",
     "🍕 Dióxido de Carbono",
-    "🍕 Metano GGCH4"
+    "🍕 Metano GGCH4",
+    "🍕 Metano Equivalente",
+    "🍕 Óxido Nitroso"
 ])
+
+# Lista de años única para los selectores
+lista_anios = sorted(df["ANIO"].unique())
 
 # ==================================================
 # TAB 1 - EVOLUCIÓN TEMPORAL
@@ -85,8 +90,6 @@ with tab1:
 with tab2:
 
     st.header("Porcentaje de emisiones de CO₂")
-
-    lista_anios = sorted(df["ANIO"].unique())
 
     anio_co2 = st.selectbox(
         "Seleccione un año",
@@ -165,5 +168,85 @@ with tab3:
             use_container_width=True
         )
 
+    else:
+        st.warning("No existen datos para el año seleccionado.")
+
+# ==================================================
+# TAB 4 - METANO EQUIVALENTE 
+# ==================================================
+
+with tab4:
+
+    st.header("Porcentaje de emisiones de Metano Equivalente")
+
+    anio_equiv = st.selectbox(
+        "Seleccione un año",
+        lista_anios,
+        key="metano_equivalente_GGCO2EQ"
+    )
+
+    df_equiv = (
+        df[df["ANIO"] == anio_equiv]
+        .groupby("SUBCATEGORIA")["METANO_EQUIVALENTE_GGCO2EQ"]
+        .sum()
+        .reset_index()
+    )
+
+    if not df_equiv.empty:
+
+        fig_equiv = px.pie(
+            df_equiv,
+            names="SUBCATEGORIA",
+            values="METANO_EQUIVALENTE_GGCO2EQ",
+            hole=0.35,
+            title=f"Porcentaje de emisiones de Metano Equivalente - Año {anio_equiv}"
+        )
+
+        fig_equiv.update_traces(
+            textposition="inside",
+            textinfo="percent+label"
+        )
+
+        st.plotly_chart(fig_equiv, use_container_width=True)
+    else:
+        st.warning("No existen datos para el año seleccionado.")
+
+# ==================================================
+# TAB 5 - ÓXIDO NITROSO 
+# ==================================================
+
+with tab5:
+
+    st.header("Porcentaje de emisiones de Óxido Nitroso")
+
+    anio_n2o = st.selectbox(
+        "Seleccione un año",
+        lista_anios,
+        key="n2o"
+    )
+
+    df_n2o = (
+        df[df["ANIO"] == anio_n2o]
+        .groupby("SUBCATEGORIA")["OXIDO_NITROSO_GGN2O"]
+        .sum()
+        .reset_index()
+    )
+
+    if not df_n2o.empty:
+
+        fig_n2o = px.pie(
+            df_n2o,
+            names="SUBCATEGORIA",
+            values="OXIDO_NITROSO_GGN2O",
+            hole=0.35,
+            title=f"Porcentaje de emisiones de Óxido Nitroso - Año {anio_n2o}"
+        )
+
+        fig_n2o.update_traces(
+            textposition="inside",
+            textinfo="percent+label"
+        )
+
+        st.plotly_chart(fig_n2o, use_container_width=True)
     else:
         st.warning("No existen datos para el año seleccionado.")
