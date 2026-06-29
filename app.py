@@ -45,7 +45,7 @@ st.markdown(estilo_diseño, unsafe_allow_html=True)
 with st.sidebar:
     # URL oficial de la imagen del logo de la UPCH
     st.image(
-        "https://upload.wikimedia.org/wikipedia/commons/e/e3/Logo_UPCH.png", 
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQboXRC_mMBO5jSs8RObrKqgR6w-ln0yX7xFty4ZVDqz4mElYhGED0QBCGb&s=10", 
         use_container_width=True
     )
     st.markdown("<br>", unsafe_allow_html=True)
