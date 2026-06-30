@@ -11,7 +11,7 @@ st.set_page_config(
 )
 
 # ==================================================
-# ESTILO Y DISEÑO PERSONALIZADO (Fondo llamativo y tarjetas)
+# ESTILO Y DISEÑO PERSONALIZADO
 # ==================================================
 estilo_diseño = """
 <style>
@@ -71,11 +71,11 @@ df["ANIO"] = df["ANIO"].astype(int)
 # ==========================
 # TÍTULO PRINCIPAL CON SÍMBOLO
 # ==========================
-st.title("🏭 Panel Interactivo de Emisiones GEI")
+st.title("🏭 Emisiones de gases de efecto invernadero (GEI)")
 st.markdown("Análisis ambiental avanzado de emisiones de Gases de Efecto Invernadero por sectores y subcategorías.")
 
 # ==========================
-# PESTAÑAS (5 pestañas oficiales)
+# PESTAÑAS (5 pestañas)
 # ==========================
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "📈 Evolución Temporal",
